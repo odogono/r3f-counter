@@ -11,7 +11,8 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setValue(prevValue => prevValue + 1);
-    }, 3000);
+      // setValue(Math.floor(Math.random() * 999999));
+    }, 500);
     return () => clearInterval(interval);
   }, []);
 

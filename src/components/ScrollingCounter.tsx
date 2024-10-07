@@ -28,7 +28,7 @@ export const ScrollingCounter: React.FC<ScrollingCounterProps> = ({ value, paddi
   }, [padding]);
 
   return (
-    <ClippedGroup width={padding * 1.2} height={1} isEnabled={false}>
+    <ClippedGroup width={padding * 1.2} height={1} isEnabled={true}>
       {digits.map((digit, index) => (
         <DigitStrip key={index} value={digit} position={digitPositions[index]} />
       ))}
