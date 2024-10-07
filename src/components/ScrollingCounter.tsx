@@ -2,6 +2,7 @@ import { Vector2, Vector3 } from 'three'
 import { Digit } from './Digit'
 import { useMemo } from 'react'
 import { DigitStrip } from './DigitStrip';
+import { ClippedGroup } from './ClippedGroup';
 
 interface ScrollingCounterProps {
   value: number;
@@ -14,7 +15,7 @@ export const ScrollingCounter: React.FC<ScrollingCounterProps> = ({ value, paddi
   
   const digits = useMemo(() => String(value).padStart(padding, '0').split('').map(Number), [value, padding]);
 
-  log(digits);
+  // log(digits);
 
   // set the digit positions
   const digitPositions = useMemo(() => {
@@ -27,10 +28,10 @@ export const ScrollingCounter: React.FC<ScrollingCounterProps> = ({ value, paddi
   }, [padding]);
 
   return (
-    <group>
+    <ClippedGroup width={padding * 1.2} height={1} isEnabled={false}>
       {digits.map((digit, index) => (
         <DigitStrip key={index} value={digit} position={digitPositions[index]} />
       ))}
-    </group>
+    </ClippedGroup>
   )
 }

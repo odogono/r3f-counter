@@ -35,8 +35,6 @@ export const Digit: React.FC<DigitProps> = ({ value, position }) => {
     }
   }, [value, texture])
 
-  log(value);
-
   return (
     <mesh ref={meshRef} position={position}>
       <planeGeometry args={[1, 1]} />
