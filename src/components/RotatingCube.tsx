@@ -4,14 +4,17 @@ import { Mesh, ShaderMaterial } from 'three'
 
 const vertexShader = `
   varying vec2 vUv;
+  varying vec3 vNormal;
   void main() {
     vUv = uv;
+    vNormal = normalize(normalMatrix * normal);
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `
 
 const fragmentShader = `
   varying vec2 vUv;
+  varying vec3 vNormal;
   uniform vec3 colorRight;
   uniform vec3 colorLeft;
   uniform vec3 colorTop;
@@ -21,12 +24,14 @@ const fragmentShader = `
 
   void main() {
     vec3 color;
-    if (vUv.x < 0.01) color = colorLeft;
-    else if (vUv.x > 0.99) color = colorRight;
-    else if (vUv.y < 0.01) color = colorBottom;
-    else if (vUv.y > 0.99) color = colorTop;
-    else if (abs(vUv.x - vUv.y) < 0.01) color = colorFront;
-    else color = colorBack;
+    vec3 absNormal = abs(vNormal);
+    if (absNormal.x > absNormal.y && absNormal.x > absNormal.z) {
+      color = vNormal.x > 0.0 ? colorRight : colorLeft;
+    } else if (absNormal.y > absNormal.x && absNormal.y > absNormal.z) {
+      color = vNormal.y > 0.0 ? colorTop : colorBottom;
+    } else {
+      color = vNormal.z > 0.0 ? colorFront : colorBack;
+    }
     gl_FragColor = vec4(color, 1.0);
   }
 `
