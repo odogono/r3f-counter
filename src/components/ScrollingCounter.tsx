@@ -22,11 +22,14 @@ export const ScrollingCounter: React.FC<ScrollingCounterProps> = ({
   const groupRef = useRef<Group>(null);
   const [planeConstants, setPlaneConstants] = useState<[number, number]>([0, 1]);
 
+  // gets an array of numbers from the value, padding it with zeros if necessary
   const digits = useMemo(
     () => String(value).padStart(padding, '0').split('').map(Number),
     [value, padding]
   );
 
+  // sets the plane constants for the digit strips
+  // this is used to clip the digit strips to the correct position
   useEffect(() => {
     if (groupRef.current) {
       const temp = new Vector3();
@@ -38,7 +41,7 @@ export const ScrollingCounter: React.FC<ScrollingCounterProps> = ({
     }
   }, []);
 
-  // set the positions of the digit strips
+  // sets the horizontal (x) positions of the digit strips
   const digitPositions = useMemo(() => {
     const positions = [];
     const inc = 1;

@@ -34,6 +34,8 @@ const InstancedDigits: React.FC<{ count: number, planeConstants: [number, number
     new Plane(new Vector3(0, 1, 0), -0.5)
   ], []);
   
+  // update the y positions of the clipping planes
+  // note: not a very accurate way of updating the positions
   useEffect(() => {
     clippingPlanes[0].constant = planeConstants[0] + (0.5 * planeConstants[1]);
     clippingPlanes[1].constant = -(planeConstants[0] - (0.5 * planeConstants[1])); 
