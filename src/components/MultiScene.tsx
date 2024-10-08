@@ -19,7 +19,7 @@ const Ground = () => {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
       <planeGeometry args={[10, 10]} />
-      <meshStandardMaterial color="lightgray" />
+      <meshStandardMaterial color="#7CFC00" />
     </mesh>
   );
 };
@@ -35,7 +35,7 @@ export const MultiScene = () => {
   return (
     <Canvas
       onCreated={({ gl }) => {
-        gl.setClearColor(new Color('#333'));
+        gl.setClearColor(new Color('skyblue'));
         gl.localClippingEnabled = true;
       }}
       camera={{ position: [5, 5, 5], fov: 75 }}>
@@ -58,7 +58,7 @@ export const MultiScene = () => {
       </group>
 
       <group position={[3, 0, -1]} rotation={[0, -0.2, 0]} scale={0.5}>
-        <Box color="lightblue" />
+        <Box color="#FF5733" />
         <ScrollingCounter
           position={new Vector3(0, 0, 0.6)}
           value={value2}
